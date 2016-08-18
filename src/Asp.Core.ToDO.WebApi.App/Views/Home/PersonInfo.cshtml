@@ -1,0 +1,56 @@
+﻿@model Asp.Core.ToDO.WebApi.App.Layer.Models.Person
+
+<div class="row">
+    <div class="col-md-12">
+        <div ng-controller="personInfoController" ng-init="initPerson(@ViewBag.personJson)" ng-cloak>
+
+            <h2>Person Info</h2>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <img src="~/uploads/@Model.Picture" />
+                </div>
+
+                <a ng-hide="editPhoto" ng-click="editPhoto = !editPhoto" href="#">Edit Image</a>
+                <form method="post" ng-show="editPhoto" action="~/Home/PostPhoto/@Model.PersonId" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <input type="file" name="file" class="" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" name="Submit" value="Submit" class="btn btn-primary" />
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <div class="form-group">
+                        <label for="usr">Id:</label>
+                        <input type="text" class="form-control" ng-model="person.personId" ng-readonly=true>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Name:</label>
+                        <input type="text" class="form-control" ng-model="person.name" ng-readonly="!editInfo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usr">Age:</label>
+                        <input type="text" class="form-control" ng-model="person.age" ng-readonly="!editInfo">
+                    </div>
+                </div>
+
+                <a ng-hide="editInfo" ng-click="editInfo = !editInfo" href="#">Edit Info</a>
+
+                <div ng-show="editInfo" class="form-group">
+                    <input type="button" name="Submit" value="Submit" ng-click="updatePerson(person)" class="btn btn-primary" />
+                </div>
+            </div>
+                   
+          
+        </div>
+    </div>
+</div>

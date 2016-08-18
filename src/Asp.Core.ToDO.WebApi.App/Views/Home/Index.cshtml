@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+
+    <div class="col-md-12">
+
+        <h2>Admin Panel for managing people</h2>
+        <div ng-controller="homeController">
+            <div class="gridDiv">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="gridBody" ng-cloak>
+                        <tr ng-repeat="p in people">
+                            <td>{{p.personId}}</td>
+                            <td>{{p.name}}</td>
+                            <td>{{p.age}}</td>
+                            <td>
+                                <a class="btn btn-info" ng-href="/Home/PersonInfo/{{p.personId}}"> Info </a>
+                                <button class="btnDelete btn btn-danger" id="{{p.personId}}" ng-click="toogleModal(true,p)" > Delete </button>                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+            <h2>Add new</h2>
+            <div class="form-group">
+                <label for="usr">Name:</label>
+                <input type="text" class="form-control" id="name" ng-model="person.name">
+            </div>
+
+            <div class="form-group">
+                <label for="usr">Age:</label>
+                <input type="number" class="form-control" id="age" ng-model="person.age">
+            </div>
+
+            <button class="btn btn-success" id="btnSave" ng-click="savePerson(person)">Save</button>
+            <br />
+
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete Person ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete the person ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger"  ng-click="deletePerson()">Delete</button>
+                            <button type="button" class="btn btn-default" ng-click="toogleModal(false)">Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+
+
+    <script>
+        $(function () {
+
+        });
+
+
+    </script>
+
+}
