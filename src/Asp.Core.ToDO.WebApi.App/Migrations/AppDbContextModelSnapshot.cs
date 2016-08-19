@@ -31,6 +31,36 @@ namespace Asp.Core.ToDO.WebApi.App.Migrations
 
                     b.ToTable("People");
                 });
+
+            modelBuilder.Entity("Asp.Core.ToDO.WebApi.App.Layer.Models.PersonTask", b =>
+                {
+                    b.Property<int>("PersonTaskId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime?>("EndTime");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("PersonId");
+
+                    b.Property<DateTime?>("StartTime");
+
+                    b.HasKey("PersonTaskId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("Asp.Core.ToDO.WebApi.App.Layer.Models.PersonTask", b =>
+                {
+                    b.HasOne("Asp.Core.ToDO.WebApi.App.Layer.Models.Person", "Person")
+                        .WithMany("Tasks")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Asp.Core.ToDO.WebApi.App.Controllers
         {
             if(ModelState.IsValid)
             {
-                person.Picture = "default.png";
+                person.Picture = "default.jpg";
                 peopleRepository.InsertPerson(person);
                 return new ObjectResult(person);
             }

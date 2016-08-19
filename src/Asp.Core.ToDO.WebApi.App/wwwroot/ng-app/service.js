@@ -9,6 +9,15 @@
                     function (response) {
                         console.log("error in getting people");
                     });
+            },            
+            getPerson: function (personId,callback) {
+                $http.get("/api/people/"+personId)
+                    .then(function (response) {
+                        callback(response.data);
+                    },
+                    function (response) {
+                        console.log("error in getting person");
+                    });
             },
             deletePerson: function (personId,callback) {
                 $http.delete("/api/people/"+personId)
@@ -36,6 +45,24 @@
                     function () {
                         console.log("error in updating Person");
                     });
+            },
+            addTaskToPerson: function (personId, task, callback) {              
+                $http.post("/api/tasks/"+ personId, task)
+                 .then(function (response) {
+                     callback(response.data);
+                 },
+                 function () {
+                     console.log("error in adding Task to Person");
+                 });
+            },
+            deleteTask: function (personTaskId, callback) {
+                $http.delete("/api/tasks/" + personTaskId)
+                .then(function (response) {
+                    callback(response.data);
+                },
+                function (response) {
+                    console.log("error in deleting Task");
+                });
             }
 
         }

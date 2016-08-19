@@ -39,6 +39,9 @@ namespace Asp.Core.ToDO.WebApi.App
             //inject the People Repository
             services.AddScoped<IPeopleRepository, PeopleRepository>();
 
+            //inject the Task Repository
+            services.AddScoped<ITaskRepository, TaskRepository>();
+
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(x =>

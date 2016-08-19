@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Asp.Core.ToDO.WebApi.App.Layer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asp.Core.ToDO.WebApi.App.Layer.Repository.Implementaitons
 {
@@ -37,7 +38,7 @@ namespace Asp.Core.ToDO.WebApi.App.Layer.Repository.Implementaitons
 
         public Person GetPersonById(int personID)
         {
-            var person = database.People.FirstOrDefault(p => p.PersonId == personID);
+            var person = database.People.Include(t => t.PersonTasks).FirstOrDefault(p => p.PersonId == personID);
             return person;          
         }
 

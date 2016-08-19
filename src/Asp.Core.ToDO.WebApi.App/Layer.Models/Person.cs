@@ -14,5 +14,7 @@ namespace Asp.Core.ToDO.WebApi.App.Layer.Models
         public int Age { get; set; }
 
         public string Picture { get; set; }
+
+        public virtual ICollection<PersonTask> PersonTasks { get; set;}
     }
 }

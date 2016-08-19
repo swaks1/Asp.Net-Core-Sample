@@ -33,18 +33,24 @@
             </div>
             <br />
             <br />
-            <h2>Add new</h2>
-            <div class="form-group">
-                <label for="usr">Name:</label>
-                <input type="text" class="form-control" id="name" ng-model="person.name">
-            </div>
+            
+            <div ng-show="addNewBool">
+                <h2>Add new</h2>
+                <div class="form-group">
+                    <label for="usr">Name:</label>
+                    <input type="text" class="form-control" id="name" ng-model="person.name">
+                </div>
 
-            <div class="form-group">
-                <label for="usr">Age:</label>
-                <input type="number" class="form-control" id="age" ng-model="person.age">
-            </div>
+                <div class="form-group">
+                    <label for="usr">Age:</label>
+                    <input type="number" class="form-control" id="age" ng-model="person.age">
+                </div>
 
-            <button class="btn btn-success" id="btnSave" ng-click="savePerson(person)">Save</button>
+                <button class="btn btn-success" id="btnSave" ng-click="savePerson(person)">Save</button>
+            </div>
+            <br /><br />
+            <a ng-hide="addNewBool" style="cursor:pointer" ng-click="addNewBool = !addNewBool">Add new Person</a>
+            <a ng-show="addNewBool" style="cursor:pointer" ng-click="addNewBool = !addNewBool">Stop Adding</a>
             <br />
 
 

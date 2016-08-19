@@ -11,7 +11,7 @@
                     <img src="~/uploads/@Model.Picture" />
                 </div>
 
-                <a ng-hide="editPhoto" ng-click="editPhoto = !editPhoto" href="#">Edit Image</a>
+
                 <form method="post" ng-show="editPhoto" action="~/Home/PostPhoto/@Model.PersonId" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -23,7 +23,10 @@
                         <input type="submit" name="Submit" value="Submit" class="btn btn-primary" />
                     </div>
 
-                </form>
+                </form>              
+
+                <a ng-hide="editPhoto" style="cursor:pointer" ng-click="editPhoto = !editPhoto">Edit Image</a>
+                <a ng-show="editPhoto" style="cursor:pointer" ng-click="editPhoto = !editPhoto">Stop Edit Image</a>
             </div>
 
             <div class="col-md-6">
@@ -41,16 +44,96 @@
                         <label for="usr">Age:</label>
                         <input type="text" class="form-control" ng-model="person.age" ng-readonly="!editInfo">
                     </div>
+                    <div ng-show="editInfo" class="form-group">
+                        <input type="button" name="Submit" value="Submit" ng-click="updatePerson(person)" class="btn btn-primary" />
+                    </div>
                 </div>
+                       
+                <a ng-hide="editInfo" style="cursor:pointer" ng-click="editInfo = !editInfo">Edit Info</a>
+                <a ng-show="editInfo" style="cursor:pointer" ng-click="editInfo = !editInfo">Stop Editing</a>
 
-                <a ng-hide="editInfo" ng-click="editInfo = !editInfo" href="#">Edit Info</a>
-
-                <div ng-show="editInfo" class="form-group">
-                    <input type="button" name="Submit" value="Submit" ng-click="updatePerson(person)" class="btn btn-primary" />
-                </div>
             </div>
-                   
-          
+
+
+            <div class="col-md-12">
+                <hr />
+                <h3>Avaible Tasks:</h3> 
+                <div class="row">
+                    <div class="col-md-3" ng-repeat="task in person.personTasks">
+                        <div class="alert alert-info">
+                            <a style="color:red; cursor:pointer" class="pull-right" ng-click="deleteTask(task.personTaskId)">
+                                Delete 
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                            <br />
+                            <span>Task Name:</span>
+                             <span class="pull-right">
+                                <b>{{task.name}} </b>
+                            </span>
+                            <br />
+                            <span>Task Description:</span>
+                            <span class="pull-right">
+                                <b>{{task.description}} </b>
+                            </span>
+                            <br />
+                            <span>Task Start Date:</span>
+                            <span class="pull-right">
+                                <b>{{task.startTime | date}} </b>
+                            </span>
+                            <br />
+                            <span>Task End Date:</span>
+                            <span class="pull-right">
+                                <b>{{task.endTime | date}} </b>
+                            </span>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <div ng-show="addTaskBool">
+                    <h3>Form for adding tasks</h3>
+                    <div class="form-group">
+                        <label for="usr">Name:</label>
+                        <input type="text" class="form-control" ng-model="task.name" ng-readonly=false>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Description:</label>
+                        <input type="text" class="form-control" ng-model="task.description" ng-readonly=false>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usr">Start Time:</label>
+                        <md-content>
+                            <md-datepicker ng-model="task.startTime"
+                                           md-placeholder="Start Time"
+                                           md-min-date="minDate"
+                                           ng-required="false">
+                            </md-datepicker>
+                        </md-content>
+                    </div>
+                                
+                    <div class="form-group">
+                        <label for="usr">End Time:</label>
+                        <md-content>
+                            <md-datepicker ng-model="task.endTime"
+                                           md-placeholder="Start Time"
+                                           md-min-date="task.startTime"
+                                           ng-required="false"
+                                           ng-disabled="task.startTime == null">
+                            </md-datepicker>
+                        </md-content>
+                    </div>
+
+
+                    <div ng-show=true class="form-group">
+                        <input type="button" name="Submit" value="Submit" ng-click="addTask()" class="btn btn-primary" />
+                    </div>
+                </div>
+
+                <a ng-hide="addTaskBool" ng-click="addTaskBool = !addTaskBool" style="cursor:pointer">Add new Task</a>
+                <a ng-show="addTaskBool" ng-click="addTaskBool = !addTaskBool" style="cursor:pointer">Hide the form</a>
+            </div>
         </div>
     </div>
 </div>

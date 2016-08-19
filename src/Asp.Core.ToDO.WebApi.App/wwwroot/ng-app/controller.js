@@ -3,11 +3,9 @@
         function ($rootScope, $scope, $peopleService) {
 
             $scope.test = "You are in TEST view";
-
             $scope.person = {};
-            $scope.people = [];
-
-            $scope.testData = "DA";
+            $scope.people = [];          
+            $scope.addNewBool = false;
 
             $peopleService.getPeople(function (data) {
                 console.log(data,"success in getting people");
@@ -45,11 +43,14 @@
         }]).controller('personInfoController', ['$rootScope', '$scope', 'peopleService',
         function ($rootScope, $scope, $peopleService) {       
             $scope.person = {};
+            $scope.task = {};
+            $scope.minDate = new Date();
             $scope.editPhoto = false;
             $scope.editInfo = false;
+            $scope.addTaskBool = false;
 
             $scope.initPerson = function (person) {
-                console.log(person);
+                console.log(person,"person added to scope");
                 $scope.person = person;
             };
 
@@ -60,6 +61,27 @@
                 });
                
             }
+
+            $scope.addTask = function () {
+                var personId = $scope.person.personId;
+                $scope.task.personId = personId;
+
+                $peopleService.addTaskToPerson(personId, $scope.task, function(data){
+                    console.log(data,"recieved task");
+                    $scope.person.personTasks.push(data);
+                    $scope.task = {};
+                });
+            }
+
+            $scope.deleteTask = function (personTaskId) {
+                $peopleService.deleteTask(personTaskId, function (data) {
+                    console.log(data, "deleted task");
+                    $peopleService.getPerson($scope.person.personId, function (data) {
+                        console.log(data, "got the person");
+                        $scope.person = data;
+                    });
+                });
+            };
 
            
 

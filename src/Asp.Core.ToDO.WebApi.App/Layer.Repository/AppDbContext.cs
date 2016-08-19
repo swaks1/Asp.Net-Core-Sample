@@ -16,5 +16,7 @@ namespace Asp.Core.ToDO.WebApi.App.Layer.Repository
 
         public DbSet <Person> People { get; set; }
 
+        public DbSet<PersonTask> Tasks { get; set; }
+
     }
 }

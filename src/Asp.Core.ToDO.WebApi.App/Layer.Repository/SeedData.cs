@@ -25,27 +25,32 @@ namespace Asp.Core.ToDO.WebApi.App.Layer.Repository
                      new Person
                      {
                          Name = "Riste",
-                         Age = 21
+                         Age = 21,
+                         Picture = "default.jpg"                
                      },
 
                     new Person
                     {
                         Name = "Marko",
-                        Age = 20
+                        Age = 20,
+                        Picture = "default.jpg"
                     },
 
                    new Person
                    {
                        Name = "Igor",
-                       Age = 21
+                       Age = 21,
+                       Picture = "default.jpg"
                    },
 
                    new Person
                    {
                        Name = "Marija",
-                       Age = 21
+                       Age = 21,
+                       Picture = "default.jpg"
                    }
                 );
+                
                 context.SaveChanges();
             }
         }
